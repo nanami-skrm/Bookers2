@@ -1,0 +1,48 @@
+<% if @book.errors.any? %>
+	<div id="error_explanation" class="alert alert-danger">
+		<h2><%= pluralize(@book.errors.count, "error") %> prohibited this product from being saved:</h2>
+    	<ul>
+        	<% @book.errors.full_messages.each do |message| %>
+          		<li><%= message %></li>
+        	<% end %>
+        </ul>
+	</div>
+<% end %>
+
+
+<h2>User info</h2>
+<%= current_user.name %>
+<div class="Edit btn">
+	<%= link_to "Edit Profile", edit_user_registration_path %>
+</div>
+
+
+<h2>New book</h2>
+<%= form_for(@book) do |f| %>
+	<p>Title</p>
+	<div class="title-form">
+		<%= f.text_field :title %>
+	</div>
+	<p>Body</p>
+	<div class="body-form">
+		<%= f.text_area :body %>
+	</div>
+	<div class="Create btn">
+		<%= f.submit 'Create Book' %>
+	</div>
+<% end %>
+
+
+<h2>Books</h2>
+<table>
+	<tr>
+		<th>   </th>
+		<th>Title</th>
+		<th>Opinion</th>
+	</tr>
+		<tr>
+			<td><%= attachment_image_tag @user, :profile_image,　format: 'jpeg', fallback: "no_image.jpg", size: "50x50" %></td>
+			<td><span><%= @book.title %></span></td>
+			<td><span><%= @book.title %></span></td>
+		</tr>
+</table>
