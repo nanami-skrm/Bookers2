@@ -1,17 +1,20 @@
-<h1>books/index</h1>
 
-<% if @book.errors.any? %>
+<h1>users/show</h1>
+
+
+<% if @user.errors.any? %>
 	<div id="error_explanation" class="alert alert-danger">
-		<h2><%= pluralize(@book.errors.count, "error") %> prohibited this product from being saved:</h2>
+		<h2><%= pluralize(@user.errors.count, "error") %> prohibited this product from being saved:</h2>
     	<ul>
-        	<% @book.errors.full_messages.each do |message| %>
+        	<% @user.errors.full_messages.each do |message| %>
           		<li><%= message %></li>
         	<% end %>
         </ul>
 	</div>
 <% end %>
 
-<h2>User info</h2><!--ログインユーザーの情報-->
+<h2>User info</h2>
+<!--ここにプロフィール画像を表示したい-->
 <%= attachment_image_tag @user, :profile_image,　format: 'jpeg', fallback: "no_image.jpg", size: "50x50" %>
 <table>
 	<tr>
@@ -21,10 +24,10 @@
 		<th>Introduction</th> <td><%= @user.introduction %></td>
 	</tr>
 </table>
-<div class="Edit btn">
-	<%= link_to "Edit Profile", edit_user_path(@user.id) %>
-</div>
 
+<div class="Edit btn">
+	<%= link_to "Edit Profile", user_path(current_user.id) %>
+</div>
 
 <h2>New book</h2>
 <%= form_for(@book) do |f| %>
@@ -41,9 +44,7 @@
 	</div>
 <% end %>
 
-
 <h2>Books</h2>
-
 <table>
 	<tr>
 		<th>   </th>
@@ -52,7 +53,7 @@
 	</tr>
 	<% @books.each do |book| %>
 		<tr>
-			<td><%= link_to user_path(book.user_id) do %>
+			<td><%= link_to edit_book_path(book.id) do %> <!--画像からuserのshowに戻りたい-->
 				<%= attachment_image_tag book.user, :profile_image,　format: 'jpeg', fallback: "no_image.jpg", size: "50x50" %>
 			<% end %>
 				</td>
