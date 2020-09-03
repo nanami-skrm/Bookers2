@@ -14,6 +14,7 @@ class BooksController < ApplicationController
 			redirect_to book_path(@book.id), notice: "Book was successfully created."
 		else
 			@books = Book.all
+			@user = current_user
 			render :index
 		end
 	end
