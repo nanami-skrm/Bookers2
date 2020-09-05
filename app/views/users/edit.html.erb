@@ -1,32 +1,37 @@
-<h1>users/edit</h1>
+<div class="container">
 
-<h2>User info</h2>
-
-<% if @user.errors.any? %>
-	<div id="error_explanation" class="alert alert-danger">
-		<h2><%= pluralize(@user.errors.count, "error") %> prohibited this product from being saved:</h2>
-    	<ul>
-        	<% @user.errors.full_messages.each do |message| %>
-          		<li><%= message %></li>
-        	<% end %>
-        </ul>
+	<div class="row">
+		
+			<h2>User info</h2>
+			<% if @user.errors.any? %>
+				<div id="error_explanation" class="alert alert-danger">
+					<h2><%= pluralize(@user.errors.count, "error") %> prohibited this product from being saved:</h2>
+    				<ul>
+        				<% @user.errors.full_messages.each do |message| %>
+          					<li><%= message %></li>
+        				<% end %>
+        			</ul>
+				</div>
+			<% end %>
+			<div class="col-xs-3">
+			<%= form_for(@user) do |f| %>
+			
+				<p class="label-name">Name</p>
+				<div class="name-form">
+					<%= f.text_field :name %>
+				</div>
+				<p class="label-image">Image</p>
+				<div class="profile_image-form">
+					<%= f.attachment_field :profile_image %>
+				</div>
+				<p class="label-introduction">Introduction</p>
+				<div class="introduction-form">
+					<%= f.text_area :introduction %>
+				</div>
+				<div class="Update btn">
+					<%= f.submit 'Update User' %>
+				</div>
+			<% end %>
+		</div>
 	</div>
-<% end %>
-
-<%= form_for(@user) do |f| %>
-	<p>Name</p>
-	<div class="name-form">
-		<%= f.text_field :name %>
-	</div>
-	<p>Image</p>
-	<div class="profile_image-form">
-		<%= f.attachment_field :profile_image %>
-	</div>
-	<p>Introduction</p>
-	<div class="introduction-form">
-		<%= f.text_area :introduction %>
-	</div>
-	<div class="Update btn">
-		<%= f.submit 'Update User' %>
-	</div>
-<% end %>
+</div>

@@ -1,46 +1,56 @@
-<h2>users/index</h2>
+<div class="container">
+	<div class="row">
+		<div class="col-md-3">
+			<h2>User info</h2><!--ログインユーザーの情報-->
+			<%= attachment_image_tag @user, :profile_image,　format: 'jpeg', fallback: "no_image.jpg", size: "100x100" %>
+			<table class="table .table">
+				<tr>
+					<th>Name</th> <td><%= @user.name %></td>
+				</tr>
+				<tr>
+					<th>Introduction</th> <td><%= @user.introduction %></td>
+				</tr>
+			</table>
+			<div class="Edit">
+				<%= link_to edit_user_path(current_user.id) do %>
+					<button type="button" class="btn btn-default btn-block col-xs-12">
+							<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
+					</button>
+				<% end %>
+			</div>
 
-<h2>User info</h2><!--ログインユーザーの情報-->
-<%= attachment_image_tag @user, :profile_image,　format: 'jpeg', fallback: "no_image.jpg", size: "50x50" %>
-<table>
-	<tr>
-		<th>Name</th> <td><%= @user.name %></td>
-	</tr>
-	<tr>
-		<th>Introduction</th> <td><%= @user.introduction %></td>
-	</tr>
-</table>
-<div class="Edit btn">
-	<%= link_to "Edit Profile", edit_user_path(current_user.id) %>
+			<h2>New book</h2>
+			<%= form_for(@new_book) do |f| %>
+				<p>Title</p>
+				<div class="title-form">
+					<%= f.text_field :title %>
+				</div>
+				<p>Body</p>
+				<div class="body-form">
+					<%= f.text_area :body %>
+				</div>
+				<div class="Create">
+					<%= f.submit 'Create Book', class:"btn btn-primary col-xs-12" %>
+				</div>
+			<% end %>
+		</div>
+
+		<div class="col-md-9">
+			<h2>Users</h2>
+				<table class="table .table">
+					<tr>
+						<th>image</th>
+						<th>name</th>
+						<th></th>
+					</tr>
+					<% @users.each do |user| %>
+					<tr>
+						<td><%= attachment_image_tag user, :profile_image,　format: 'jpeg', fallback: "no_image.jpg", size: "50x50" %></td>
+						<td><%= user.name %></td>
+						<td><%= link_to "Show", user_path(user.id) %></td>
+					</tr>
+					<% end %>
+				</table>
+		</div>
+	</div>
 </div>
-
-<h2>New book</h2>
-<%= form_for(@new_book) do |f| %>
-	<p>Title</p>
-	<div class="title-form">
-		<%= f.text_field :title %>
-	</div>
-	<p>Body</p>
-	<div class="body-form">
-		<%= f.text_area :body %>
-	</div>
-	<div class="Create btn">
-		<%= f.submit 'Create Book' %>
-	</div>
-<% end %>
-
-<h2>Users</h2>
-<table>
-	<tr>
-		<th>image</th>
-		<th>name</th>
-		<th></th>
-	</tr>
-	<% @users.each do |user| %>
-		<tr>
-			<td><%= user.profile_image %></td> <!--画像ない時の表示設定をする-->
-			<td><%= user.name %></td>
-			<td><%= link_to "Show", user_path(user.id) %></td>
-		</tr>
-	<% end %>
-</table>
