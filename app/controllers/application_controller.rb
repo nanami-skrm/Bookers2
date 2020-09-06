@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
 	before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :authenticate_user!, except: [:top, :about]
 
 	def after_sign_in_path_for(resource)
     	user_path(resource)
@@ -8,7 +9,7 @@ class ApplicationController < ActionController::Base
   	protected
 
   	def configure_permitted_parameters
-    	devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
+    	devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :email])
     	#nameカラムを追加したから？devise_parameter_sanitizer.permitって何のこと？
     	devise_parameter_sanitizer.permit(:account_update, keys: [:name, :introduction])
   	end

@@ -14,7 +14,7 @@
           <div class="col-xs-1">
             <h2 class="logo">Bookers</h2>
           </div>
-          <div class="col-xs-4 col-md-offset-7">
+          <div class="col-xs-4 col-md-offset-7 navbar-right">
             <% if user_signed_in? %>
               <%= link_to user_path(current_user.id) do %>
                 <span class="glyphicon glyphicon-home" aria-hidden="true"> Home</span>
@@ -51,10 +51,15 @@
             <% end %>
           </div>
         </div>
+      </div>
     </header>
     <%= yield %>
     <footer>
-      <p>CopyRight Infratop.inc</p>
+      <div class="row">
+        <div class="col-xs-3 col-xs-offset-9">
+          <p>CopyRight Infratop.inc</p>
+        </div>
+      </div>
     </footer>
   </body>
 </html>

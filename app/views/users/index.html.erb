@@ -1,6 +1,6 @@
 <div class="container">
 	<div class="row">
-		<div class="col-md-3">
+		<div class="col-xs-3">
 			<h2>User info</h2><!--ログインユーザーの情報-->
 			<%= attachment_image_tag @user, :profile_image,　format: 'jpeg', fallback: "no_image.jpg", size: "100x100" %>
 			<table class="table .table">
@@ -23,11 +23,11 @@
 			<%= form_for(@new_book) do |f| %>
 				<p>Title</p>
 				<div class="title-form">
-					<%= f.text_field :title %>
+					<%= f.text_field :title, class:"col-xs-12" %>
 				</div>
 				<p>Body</p>
 				<div class="body-form">
-					<%= f.text_area :body %>
+					<%= f.text_area :body, class:"col-xs-12" %>
 				</div>
 				<div class="Create">
 					<%= f.submit 'Create Book', class:"btn btn-primary col-xs-12" %>
@@ -35,22 +35,25 @@
 			<% end %>
 		</div>
 
-		<div class="col-md-9">
+		<div class="col-xs-9">
 			<h2>Users</h2>
-				<table class="table .table">
+			<table class="table">
+				<thead>
 					<tr>
 						<th>image</th>
 						<th>name</th>
 						<th></th>
 					</tr>
+				</thead>
+				<tbody>
 					<% @users.each do |user| %>
-					<tr>
-						<td><%= attachment_image_tag user, :profile_image,　format: 'jpeg', fallback: "no_image.jpg", size: "50x50" %></td>
+					<tr>							<td><%= attachment_image_tag user, :profile_image,　format: 'jpeg', fallback: "no_image.jpg", size: "40x40" %></td>
 						<td><%= user.name %></td>
 						<td><%= link_to "Show", user_path(user.id) %></td>
 					</tr>
 					<% end %>
-				</table>
+				</tbody>
+			</table>
 		</div>
 	</div>
 </div>

@@ -14,7 +14,7 @@
 
 		<div class="col-xs-3">
 			<h2>User info</h2><!--その本を投稿したユーザーの情報-->
-				<%= attachment_image_tag @user, :profile_image,　format: 'jpeg', fallback: "no_image.jpg", size: "50x50" %>
+				<%= attachment_image_tag @user, :profile_image,　format: 'jpeg', fallback: "no_image.jpg", size: "100x100" %>
 				<table class="table .table">
 					<tr>
 						<th>Name</th> <td><%= @user.name %></td>
@@ -23,9 +23,9 @@
 						<th>Introduction</th> <td><%= @user.introduction %></td>
 					</tr>
 				</table>
-				<div class="Edit btn">
+				<div class="Edit">
 					<%= link_to edit_user_path(current_user.id) do %>
-						<button type="button" class="btn btn-default btn-block">
+						<button type="button" class="btn btn-default btn-block col-xs-12">
 							<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
 						</button>
 					<% end %>
@@ -36,35 +36,36 @@
 				<%= form_for(@new_book) do |f| %>
 					<p>Title</p>
 					<div class="title-form">
-						<%= f.text_field :title %>
+						<%= f.text_field :title, class:"col-xs-12" %>
 					</div>
 					<p>Body</p>
 					<div class="body-form">
-						<%= f.text_area :body %>
+						<%= f.text_area :body, class:"col-xs-12" %>
 					</div>
-					<div class="Create btn">
-						<%= f.submit 'Create Book' %>
+					<div class="Create">
+						<%= f.submit 'Create Book', class:"btn btn-primary col-xs-12" %>
 					</div>
 				<% end %>
 		</div>
 		<div class="col-xs-9">
 			<h2>Book detail</h2>
-			<table class="table .table">
-				<tr>
-					<td>
-						<%= attachment_image_tag @user, :profile_image,　format: 'jpeg', fallback: "no_image.jpg", size: "50x50" %><br>
-						<%= link_to user_path(@user) do %>
-						<%= @user.name %>
+			<table class="table">
+				<tbody>
+					<tr>
+						<td>
+							<%= attachment_image_tag @user, :profile_image,　format: 'jpeg', fallback: "no_image.jpg", size: "40x40" %><br>
+							<%= link_to user_path(@user) do %>
+							<%= @user.name %>
+							<% end %>
+						</td>
+						<td><span><%= @book.title %></span></td>
+						<td><span><%= @book.body %></span></td>
+						<% if @user.id == current_user.id %>
+							<td><%= link_to "Edit", edit_book_path(@book.id), class: "btn btn-success"  %></td>
+							<td><%= link_to "Destroy",book_path(@book.id), method: :delete, class: "btn btn-danger" %></td>
 						<% end %>
-					</td>
-					<td><span><%= @book.title %></span></td>
-					<td><span><%= @book.body %></span></td>
-					<% if @user.id == current_user.id %>
-						<td><%= link_to "Edit", edit_book_path(@book.id), class: "btn btn-success"  %></td>
-						<td><%= link_to "Destroy",book_path(@book.id), method: :delete, class: "btn btn-danger" %></td>
-					<% end %>
-
-				</tr>
+					</tr>
+				</tbody>
 			</table>
 		</div>
 	</div>
